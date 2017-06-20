@@ -1,0 +1,15 @@
+﻿
+Sophie Hatter&% Olá, aprendiz! $#0
+Sophie Hatter&% É um prazer ter você em nossa loja! $#1
+Sophie Hatter&% Mas para que possa começar de fato a atender nossos estimados clientes $#2
+Sophie Hatter&% É necessário que demonstre a qualidade do seu trabalho preparando, sob a minha supervisão, todos tipos de café que nosso Menu oferece. $#3
+Sophie Hatter&% Uma vez que consiga prepará-los com excelência, estará apto a exercer sua função em nossa equipe! $#4
+Sophie Hatter&% Não se acanhe, eu demonstrarei cada um deles $#5
+Sophie Hatter&% Basta ter bastante atenção e muito apreço pela preparação do café para fazê-lo tão bem quanto eu! $#6
+Sophie Hatter&% Assim, vamos começar... $#7
+Sophie Hatter&% Bom, o primeiro tipo de café que ensinarei a preparar será o Espresso! $#8
+Sophie Hatter&% O café espresso brasileiro é caracterizado pela extração entre 20 e 30 segundos, com crema de cor amendoada $#9
+Sophie Hatter&% E a xícara de 50 ml completa ao final do processo. $#10
+Sophie Hatter&% A crema é uma espessa camada de creme do café espresso que mantém a temperatura e preserva o aroma do café antes de ser consumido. $#11
+Sophie Hatter&% Há nele uma grande quantidade de açúcar proveniente dos grãos do café, portanto, natural. $#12
+Sophie Hatter&% Aqui está o meu. Agora, vamos lá, é a sua vez! $#13
