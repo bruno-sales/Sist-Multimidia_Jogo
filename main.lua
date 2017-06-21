@@ -137,10 +137,10 @@ function DesenhaEscolhaFase()
     love.graphics.draw(nobean,540,145)    
     love.graphics.setColor(0,0,0) 
 
-    love.graphics.print("Fase 2 - Outro Café", 180, 220)
-    love.graphics.print("Fase 3 - Outro Café", 180, 290)
-    love.graphics.print("Fase 4 - Outro Café", 180, 360)
-    love.graphics.print("Fase 5 - Outro Café", 180, 420)
+    love.graphics.print("Fase 2 - Longo", 180, 220)
+    love.graphics.print("Fase 3 - Ristretto", 180, 290)
+    love.graphics.print("Fase 4 - Latte", 180, 360)
+    love.graphics.print("Fase 5 - Cappuccino", 180, 430)
 
     love.graphics.rectangle("line", 160, 140, 430, 40)
   end
@@ -292,7 +292,7 @@ function calculaPontuacao()
     local conseguiuExtracao = (minhaExtracao >= extracaoMinima and minhaExtracao <= extracaoMaxima ) and
     (minhaXicara == xicaraIdeal)
 
-    if (minhaExtracao == 0 or minhaExtracao == 0) then
+    if (minhaExtracao == 0 or minhaXicara == 0) then
       pontuacaoConseguida = 0
 
     elseif conseguiuExtracao and (minhaXicara == xicaraIdeal) and tempo < 30 then
