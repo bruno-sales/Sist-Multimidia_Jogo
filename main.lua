@@ -20,8 +20,14 @@ function love.load()
 
   --background Inicial
   bgMain = love.graphics.newImage("imgs/bgMain.png")
-  bg1 = love.graphics.newImage("imgs/open2.png")
+  bg1 = love.graphics.newImage("imgs/bgMain.png")
   bgFases = love.graphics.newImage("imgs/bgFases.png")
+  cozinha = love.graphics.newImage("imgs/cozinha.png")
+  sophie = love.graphics.newImage("imgs/sophie.png")
+  maquina = love.graphics.newImage("imgs/maquina.png")
+  
+  
+  
   desvanecer = 0 -- Fade da CS de abertura
 
   --Fontes
@@ -116,13 +122,8 @@ function DesenhaTelaInicial()
 
   love.graphics.setBackgroundColor(255,255,255)
 
-  love.graphics.draw(bgMain,1,1)
-  love.graphics.draw(bg1,80,30)
-
-  love.graphics.setColor(0,0,0)
-  love.graphics.setFont(fonteTitulo)
-  love.graphics.print("Clique para Iniciar", 230, 350)
-  love.graphics.setColor(255,255,255)
+  --love.graphics.draw(bgMain,1,1)
+  love.graphics.draw(bg1,1,1)
 
 end
 
@@ -136,7 +137,9 @@ function DesenhaInicioTutorial()
 
   if(desvanecer >= 250) then
     love.graphics.setColor(255,255,255) 
-
+    
+    love.graphics.draw(cozinha,1,1)
+    love.graphics.draw(sophie,100,1)
     DesenhaDialogo(posicaoFala)
 
     if posicaoFala > 13 then
@@ -207,7 +210,7 @@ function DesenhaFase1()
 
   love.graphics.setBackgroundColor(255,255,255)
 
-  --love.graphics.draw(bg1,80,30)
+  love.graphics.draw(maquina,1,1)
 
   if(pararTempo == false) then 
     tempo = love.timer.getTime() - inicioTemporizador
@@ -215,10 +218,10 @@ function DesenhaFase1()
 
   love.graphics.setColor(0,0,0)
   love.graphics.setFont(fonteDialogo)
-  love.graphics.print("Fazendo Espresso", 300, 200)
-  love.graphics.print(string.format("Tempo real: %d segundos",tempo), 500, 20)
+  love.graphics.print("Fazendo Espresso", 300, 50)
+  love.graphics.print(string.format("Tempo real: %d segundos",tempo), 500, 3)
   love.graphics.print(string.format("Tempo extraindo: %d segundos", tempoExtraindo*6), 500, 60)
-  love.graphics.print(string.format("Xicara: %d ml", volumeXicara), 20, 20)
+  love.graphics.print(string.format("Xicara: %d ml", volumeXicara), 20, 3)
   love.graphics.setColor(255,255,255)
 
   love.graphics.setColor(255,0,0)
