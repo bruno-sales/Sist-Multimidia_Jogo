@@ -4,8 +4,13 @@
 
 function love.load()
 
-  --musicFight = love.audio.newSource("Songs/Exhilarate.mp3")
+  musicIntro = love.audio.newSource("sngs/Carefree.mp3")
+  musicGame = love.audio.newSource("sngs/Life_of_Riley.mp3")
 
+
+  musicIntro:play()
+  
+  
   love.window.setTitle("Espresson Caffè v0.3.7")
 
   icon = love.image.newImageData("imgs/icon.png")
@@ -50,16 +55,39 @@ function love.update(dt)
   if fase == 0 and love.mouse.isDown(1) then
     fase = 1
     love.graphics.setBackgroundColor(0,0,0)
+    
+    if not musicGame:isPlaying() then      
+      musicIntro:stop()
+      musicGame:play()
+    end
+    
   end
+  
   if fase == 1 then
     CSintro(dt)
+    
+    if not musicGame:isPlaying() then      
+      musicIntro:stop()
+      musicGame:play()
+    end
   end
+  
   if fase == 2 then
     CSSelecaoFase(dt)
+    
+    if not musicGame:isPlaying() then      
+      musicIntro:stop()
+      musicGame:play()
+    end
   end
 
   if fase == 3 then
     GameInteration(dt)
+    
+    if not musicGame:isPlaying() then      
+      musicIntro:stop()
+      musicGame:play()
+    end
   end
 
 end
@@ -111,7 +139,7 @@ function DesenhaInicioTutorial()
 
     DesenhaDialogo(posicaoFala)
 
-    if posicaoFala >= 13 then
+    if posicaoFala > 13 then
       fase = 2
       desvanecer = 0
     end
