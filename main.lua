@@ -6,7 +6,7 @@ function love.load()
 
   --musicFight = love.audio.newSource("Songs/Exhilarate.mp3")
 
-  love.window.setTitle("Espresson Caffè v0.3.3")
+  love.window.setTitle("Espresson Caffè v0.3.7")
 
   icon = love.image.newImageData("imgs/icon.png")
   love.window.setIcon(icon)
@@ -14,7 +14,9 @@ function love.load()
   dialogBox = love.graphics.newImage("imgs/dialog.png")
 
   --background Inicial
-  bg1 = love.graphics.newImage("imgs/open.png")
+  bgMain = love.graphics.newImage("imgs/bgMain.png")
+  bg1 = love.graphics.newImage("imgs/open2.png")
+  bgFases = love.graphics.newImage("imgs/bgFases.png")
   desvanecer = 0 -- Fade da CS de abertura
 
   --Fontes
@@ -32,12 +34,15 @@ function love.load()
   volumeXicara = 0
 
   pontuacaoConseguida = 0
+  pontuacaoConseguidaMaxima = 0
 
   exibirPontuacao = false
   pararTempo = false
-  
+  voltaMenu = false
+
   --Imagem da pontuação
   nobean = love.graphics.newImage("imgs/no-bean.png")
+  bean = love.graphics.newImage("imgs/bean.png")
 end
 
 function love.update(dt)
@@ -83,6 +88,7 @@ function DesenhaTelaInicial()
 
   love.graphics.setBackgroundColor(255,255,255)
 
+  love.graphics.draw(bgMain,1,1)
   love.graphics.draw(bg1,80,30)
 
   love.graphics.setColor(0,0,0)
@@ -125,24 +131,44 @@ function DesenhaEscolhaFase()
   love.graphics.setBackgroundColor(desvanecer,desvanecer,desvanecer)
 
   if(desvanecer >= 250) then
+    
+    love.graphics.draw(bgFases,1,1)
+    
     love.graphics.setColor(0,0,0) 
     love.graphics.setFont(fonteDialogo)
     love.graphics.print("Fase 1 - Expresso", 180, 150)    
 
     love.graphics.setColor(255,255,255) 
-    love.graphics.draw(nobean,400,145)  
-    love.graphics.draw(nobean,435,145)  
-    love.graphics.draw(nobean,470,145)  
-    love.graphics.draw(nobean,505,145)  
-    love.graphics.draw(nobean,540,145)    
-    love.graphics.setColor(0,0,0) 
+
+    local cafesConseguidos = pontuacaoConseguidaMaxima
+    local desenhaConseguido = false
+
+    for i = 0, 4, 1 do
+      local xIncremental = 35 * i
+
+      if(i < cafesConseguidos) then
+        desenhaConseguido = true
+      else
+        desenhaConseguido = false
+      end
+
+      if(desenhaConseguido == true) then
+        love.graphics.draw(bean,450 + xIncremental,145)  
+      else 
+        love.graphics.draw(nobean,450 + xIncremental,145)  
+      end
+
+    end
+
+   love.graphics.setColor(50,50,50) 
 
     love.graphics.print("Fase 2 - Longo", 180, 220)
     love.graphics.print("Fase 3 - Ristretto", 180, 290)
     love.graphics.print("Fase 4 - Latte", 180, 360)
     love.graphics.print("Fase 5 - Cappuccino", 180, 430)
-
-    love.graphics.rectangle("line", 160, 140, 430, 40)
+    love.graphics.setColor(255,255,255) 
+    
+    love.graphics.rectangle("line", 160, 140, 480, 40)
   end
 
 
@@ -158,7 +184,7 @@ function DesenhaFase1()
   if(pararTempo == false) then 
     tempo = love.timer.getTime() - inicioTemporizador
   end
-  
+
   love.graphics.setColor(0,0,0)
   love.graphics.setFont(fonteDialogo)
   love.graphics.print("Fazendo Espresso", 300, 200)
@@ -174,36 +200,42 @@ function DesenhaFase1()
   love.graphics.rectangle("fill", 50, 140, 30, 80)  
 
   love.graphics.setColor(0,0,255)
-  love.graphics.rectangle("fill", 350, 500, 200, 70)
+  love.graphics.rectangle("fill", 320, 300, 200, 70)
 
   love.graphics.setColor(255,255,255)
-  love.graphics.print("Pronto!", 400, 530)
+  love.graphics.print("Pronto!", 370, 330)
 
-  love.graphics.setColor(0,0,0)
+  --love.graphics.setColor(0,0,0)
   if(exibirPontuacao) then
 
     if(pontuacaoConseguida == 5) then
-      love.graphics.print("Surpreendente! 5 pontos! Seu café está ótimo! Você parece ter o dom para a coisa!", 30, 400)
+      DesenhaDialogo(-5)
 
     elseif (pontuacaoConseguida == 4) then
-      love.graphics.print("Hm! Pontuação 4. Quase lá. Tá faltando alguma coisa...", 30, 400)
+      DesenhaDialogo(-4)
 
     elseif (pontuacaoConseguida == 3) then
-      love.graphics.print("Pontuação 3. Você errou em alguma coisinha. Alguns clientes podem reclamar", 30, 400)
+      DesenhaDialogo(-3)
 
     elseif (pontuacaoConseguida == 2) then
-      love.graphics.print("Parece faltar algo. Pontuação 2. Tente novamente.", 30, 400)
+      DesenhaDialogo(-2)
 
     elseif (pontuacaoConseguida == 1) then
-      love.graphics.print("Hmmm, pontuação 1. Não está em um nível aceitável, preste mais atenção e tente novamente", 30, 400)
+      DesenhaDialogo(-1)
 
     elseif (pontuacaoConseguida == 0) then
-      love.graphics.print("Uh-oh, sua pontuação foi 0. Certeza que quer trabalhar aqui?", 30, 400)
+      DesenhaDialogo(-0)
 
     end 
 
+    if(pontuacaoConseguida > pontuacaoConseguidaMaxima) then
+      pontuacaoConseguidaMaxima = pontuacaoConseguida
+    end
+
+    voltaMenu = true
+
   end
-  
+
   love.graphics.setColor(255,255,255)
 end
 --Desenho da caixa de texto
@@ -251,10 +283,14 @@ function love.mousepressed(x, y, button, istouch)
     posicaoFala = posicaoFala + 1; 
   end
 
-  if button == 1 and fase == 2 and (x >= 160 and x <= 660) and (y >= 140 and y <= 180) then 
+  --Inicia jogo
+  if button == 1 and fase == 2 and (x >= 160 and x <= 710) and (y >= 140 and y <= 180) then 
     fase = 3; 
-    inicioTemporizador = love.timer.getTime()
+    inicioTemporizador = love.timer.getTime()    
+
+    resetaVariaveis()
   end
+
 
   if button == 1 and fase == 3 and (love.mouse.getX() >= 50 and love.mouse.getX() <= 80) 
   and (love.mouse.getY() >= 140 and love.mouse.getY() <= 240) then  
@@ -266,12 +302,21 @@ function love.mousepressed(x, y, button, istouch)
     end
   end
 
-  if button == 1 and fase == 3 and (love.mouse.getX() >= 350 and love.mouse.getX() <= 550) 
-  and (love.mouse.getY() >= 500 and love.mouse.getY() <= 570) then  
+  --love.graphics.rectangle("fill", 320, 300, 200, 70)
+
+  if button == 1 and fase == 3 and (love.mouse.getX() >= 320 and love.mouse.getX() <= 520) 
+  and (love.mouse.getY() >= 300 and love.mouse.getY() <= 370) then  
 
     calculaPontuacao()
     exibirPontuacao = true
     pararTempo = true
+
+  end
+
+  --Volta pro menu
+  if button == 1 and fase == 3 and voltaMenu == true then  
+
+    fase = 2
 
   end
 end
@@ -279,7 +324,7 @@ end
 function calculaPontuacao()
 
   if(fase == 3) then
- --require('mobdebug').start()
+    --require('mobdebug').start()
     --Ideais
     local extracaoMaxima = 31
     local extracaoMinima = 20      
@@ -315,6 +360,16 @@ function calculaPontuacao()
     end 
 
   end
+end
+
+function resetaVariaveis()
+
+  exibirPontuacao = false
+  pararTempo = false
+  voltaMenu = false
+  tempoExtraindo = 0
+  volumeXicara = 0
+
 end
 
 --Carrega fala de acordo com o identificador

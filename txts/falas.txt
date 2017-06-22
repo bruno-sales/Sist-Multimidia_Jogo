@@ -13,3 +13,10 @@ Sophie Hatter&% E a xícara de 50 ml completa ao final do processo. $#10
 Sophie Hatter&% A crema é uma espessa camada de creme do café espresso que mantém a temperatura e preserva o aroma do café antes de ser consumido. $#11
 Sophie Hatter&% Há nele uma grande quantidade de açúcar proveniente dos grãos do café, portanto, natural. $#12
 Sophie Hatter&% Aqui está o meu. Agora, vamos lá, é a sua vez! $#13
+
+Sophie Hatter&% Surpreendente! 5 pontos! Seu café está ótimo! Você parece ter o dom para a coisa! $#-5
+Sophie Hatter&% Hm! Pontuação 4. Quase lá. Tá faltando alguma coisa... $#-4
+Sophie Hatter&% Pontuação 3. Você errou em alguma coisinha. Alguns clientes podem reclamar... $#-3
+Sophie Hatter&% Parece faltar algo. Pontuação 2. Tente novamente. $#-2
+Sophie Hatter&% Hmmm, pontuação 1. Não está em um nível aceitável, preste mais atenção e tente novamente $#-1
+Sophie Hatter&% Uh-oh, sua pontuação foi 0. Certeza que quer trabalhar aqui? $#-0
