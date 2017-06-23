@@ -36,7 +36,7 @@ function love.load()
   fonteTitulo = love.graphics.newFont("fnts/clBold.ttf", 50 )
   --Fim
 
-  fase = 2
+  fase = 0
 
   --Variavel de controle de posição da linha de dialogo
   posicaoFala = 0
