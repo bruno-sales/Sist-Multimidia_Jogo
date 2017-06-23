@@ -11,7 +11,7 @@ function love.load()
   musicIntro:play()
   
   
-  love.window.setTitle("Espresson Caffè v0.3.7")
+  love.window.setTitle("Espresson Caffè v0.3.9")
 
   icon = love.image.newImageData("imgs/icon.png")
   love.window.setIcon(icon)
@@ -22,10 +22,11 @@ function love.load()
   bgMain = love.graphics.newImage("imgs/bgMain.png")
   bg1 = love.graphics.newImage("imgs/bgMain.png")
   bgFases = love.graphics.newImage("imgs/bgFases.png")
-  cozinha = love.graphics.newImage("imgs/cozinha.png")
-  sophie = love.graphics.newImage("imgs/sophie.png")
+  cozinha = love.graphics.newImage("imgs/cenariosophie.png")
+  --sophie = love.graphics.newImage("imgs/sophie.png")
   maquina = love.graphics.newImage("imgs/maquina.png")
-  
+  xicara = love.graphics.newImage("imgs/xicara.png")
+   
   
   
   desvanecer = 0 -- Fade da CS de abertura
@@ -35,7 +36,7 @@ function love.load()
   fonteTitulo = love.graphics.newFont("fnts/clBold.ttf", 50 )
   --Fim
 
-  fase = 0
+  fase = 2
 
   --Variavel de controle de posição da linha de dialogo
   posicaoFala = 0
@@ -139,7 +140,7 @@ function DesenhaInicioTutorial()
     love.graphics.setColor(255,255,255) 
     
     love.graphics.draw(cozinha,1,1)
-    love.graphics.draw(sophie,100,1)
+    --love.graphics.draw(sophie,100,1)
     DesenhaDialogo(posicaoFala)
 
     if posicaoFala > 13 then
@@ -208,9 +209,10 @@ end
 
 function DesenhaFase1()
 
-  love.graphics.setBackgroundColor(255,255,255)
+  love.graphics.setBackgroundColor(255, 255, 255)
 
-  love.graphics.draw(maquina,1,1)
+  love.graphics.draw(maquina,1,60)
+  love.graphics.draw(xicara,380,350)
 
   if(pararTempo == false) then 
     tempo = love.timer.getTime() - inicioTemporizador
@@ -221,22 +223,16 @@ function DesenhaFase1()
   love.graphics.print("Fazendo Espresso", 300, 50)
   love.graphics.print(string.format("Tempo real: %d segundos",tempo), 500, 3)
   love.graphics.print(string.format("Tempo extraindo: %d segundos", tempoExtraindo*6), 500, 60)
-  love.graphics.print(string.format("Xicara: %d ml", volumeXicara), 20, 3)
+  love.graphics.print(string.format("Xicara: %d ml", volumeXicara), 370, 320)
   love.graphics.setColor(255,255,255)
-
-  love.graphics.setColor(255,0,0)
-  love.graphics.rectangle("fill", 600, 140, 30, 100)  
-
-  love.graphics.setColor(0,255,0)
-  love.graphics.rectangle("fill", 50, 140, 30, 80)  
 
   love.graphics.setColor(0,0,255)
-  love.graphics.rectangle("fill", 320, 300, 200, 70)
+  love.graphics.rectangle("line", 320, 480, 200, 70)
+
+  love.graphics.setColor(0,0,0)
+  love.graphics.print("Pronto!", 375, 505)
 
   love.graphics.setColor(255,255,255)
-  love.graphics.print("Pronto!", 370, 330)
-
-  --love.graphics.setColor(0,0,0)
   if(exibirPontuacao) then
 
     if(pontuacaoConseguida == 5) then
@@ -301,8 +297,10 @@ end
 
 function GameInteration(dt)
 
-  if love.mouse.isDown(1) and (love.mouse.getX() >= 600 and love.mouse.getX() <= 630) 
-  and (love.mouse.getY() >= 140 and love.mouse.getY() <= 240) then
+--love.graphics.rectangle("fill", 600, 140, 30, 100)  
+
+  if love.mouse.isDown(1) and (love.mouse.getX() >= 200 and love.mouse.getX() <= 630) 
+  and (love.mouse.getY() >= 150 and love.mouse.getY() <= 250) then
     tempoExtraindo = (tempoExtraindo + dt)
   end
 
@@ -322,9 +320,10 @@ function love.mousepressed(x, y, button, istouch)
     resetaVariaveis()
   end
 
-
-  if button == 1 and fase == 3 and (love.mouse.getX() >= 50 and love.mouse.getX() <= 80) 
-  and (love.mouse.getY() >= 140 and love.mouse.getY() <= 240) then  
+ --love.graphics.draw(xicara,380,350)
+ 
+  if button == 1 and fase == 3 and (love.mouse.getX() >= 380 and love.mouse.getX() <= 480) 
+  and (love.mouse.getY() >= 350 and love.mouse.getY() <= 450) then  
 
     if volumeXicara < 40 then 
       volumeXicara = (volumeXicara + 15)
@@ -333,10 +332,10 @@ function love.mousepressed(x, y, button, istouch)
     end
   end
 
-  --love.graphics.rectangle("fill", 320, 300, 200, 70)
+  --love.graphics.rectangle("line", 320, 480, 200, 70)
 
   if button == 1 and fase == 3 and (love.mouse.getX() >= 320 and love.mouse.getX() <= 520) 
-  and (love.mouse.getY() >= 300 and love.mouse.getY() <= 370) then  
+  and (love.mouse.getY() >= 480 and love.mouse.getY() <= 550) then  
 
     calculaPontuacao()
     exibirPontuacao = true
