@@ -22,13 +22,13 @@ function love.load()
   bgMain = love.graphics.newImage("imgs/bgMain.png")
   bg1 = love.graphics.newImage("imgs/bgMain.png")
   bgFases = love.graphics.newImage("imgs/bgFases.png")
+  glow = love.graphics.newImage("imgs/glowBlue.png")
   cozinha = love.graphics.newImage("imgs/cenariosophie.png")
   --sophie = love.graphics.newImage("imgs/sophie.png")
   maquina = love.graphics.newImage("imgs/maquina.png")
   xicara = love.graphics.newImage("imgs/xicara.png")
    
-  
-  
+    
   desvanecer = 0 -- Fade da CS de abertura
 
   --Fontes
@@ -220,9 +220,9 @@ function DesenhaFase1()
 
   love.graphics.setColor(0,0,0)
   love.graphics.setFont(fonteDialogo)
-  love.graphics.print("Fazendo Espresso", 300, 50)
-  love.graphics.print(string.format("Tempo real: %d segundos",tempo), 500, 3)
-  love.graphics.print(string.format("Tempo extraindo: %d segundos", tempoExtraindo*6), 500, 60)
+  love.graphics.print("Fazendo Espresso", 350, 50)
+  love.graphics.print(string.format("Tempo real: %d segundos",tempo), 530, 10)
+  love.graphics.print(string.format("Tempo extraindo: %d segundos", tempoExtraindo*6), 30, 10)
   love.graphics.print(string.format("Xicara: %d ml", volumeXicara), 370, 320)
   love.graphics.setColor(255,255,255)
 
@@ -232,6 +232,12 @@ function DesenhaFase1()
   love.graphics.setColor(0,0,0)
   love.graphics.print("Pronto!", 375, 505)
 
+  love.graphics.setColor(255,255,255)
+  love.graphics.draw(glow,131,117)
+  love.graphics.draw(glow,420,117)
+  --(x >= 160 and x <= 710) and (y >= 140 and y <= 180)
+  
+  
   love.graphics.setColor(255,255,255)
   if(exibirPontuacao) then
 
@@ -300,7 +306,7 @@ function GameInteration(dt)
 --love.graphics.rectangle("fill", 600, 140, 30, 100)  
 
   if love.mouse.isDown(1) and (love.mouse.getX() >= 200 and love.mouse.getX() <= 630) 
-  and (love.mouse.getY() >= 150 and love.mouse.getY() <= 250) then
+  and (love.mouse.getY() >= 180 and love.mouse.getY() <= 250) then
     tempoExtraindo = (tempoExtraindo + dt)
   end
 
